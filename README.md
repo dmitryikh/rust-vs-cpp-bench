@@ -31,6 +31,9 @@ to avoid stack overflow. Complexity is O(N logN).
 `levenshtein` distance is usually used to quantify the difference between two
 strings. The algorithm is implemented in dynamic prgramming manner. Complexity is O(N^2).
 
+## Performance results
+![Performance table](performance_table.png?raw=true "Performance table")
+
 ## Folders overview
 
 Each problem can be found in the folder with the same name. In each folder here
