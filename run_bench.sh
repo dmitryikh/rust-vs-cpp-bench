@@ -15,7 +15,7 @@ touch $out
 for t in "${tests[@]}"
 do
     echo "Test $t" | tee -a $out
-    cd "stepik_alg_$t"
+    cd "$t"
     echo
     echo "Compiling programs.." | tee -a $out
     make &> /dev/null

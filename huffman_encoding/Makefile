@@ -6,6 +6,6 @@ gen:
 	echo 1000000  | cargo run > ../inp_mid;\
 	echo 10000000 | cargo run > ../inp_hi;\
 	cd ..;\
-	cat inp_low | ./main_rust > ../stepik_alg_4_2_6/inp_low;\
-	cat inp_mid | ./main_rust > ../stepik_alg_4_2_6/inp_mid;\
-	cat inp_hi  | ./main_rust > ../stepik_alg_4_2_6/inp_hi;\
+	cat inp_low | ./main_rust > ../huffman_decoding/inp_low;\
+	cat inp_mid | ./main_rust > ../huffman_decoding/inp_mid;\
+	cat inp_hi  | ./main_rust > ../huffman_decoding/inp_hi;\
