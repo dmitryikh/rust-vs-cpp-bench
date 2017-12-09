@@ -48,12 +48,12 @@ impl Node {
 
     // traverse tree building letter->code `map`
     fn build_map(&self, map: &mut HashMap<char, String>, prefix: String) {
-        match &self.right {
-            &Some(ref leaf) => leaf.build_map(map, prefix.clone() + "1"),
+        match self.right {
+            Some(ref leaf) => leaf.build_map(map, prefix.clone() + "1"),
             _ => { },
         }
-        match &self.left {
-            &Some(ref leaf) => { leaf.build_map(map, prefix.clone() + "0"); },
+        match self.left {
+            Some(ref leaf) => { leaf.build_map(map, prefix + "0"); },
             _ => { map.insert(self.letter, prefix); },
         }
     }
