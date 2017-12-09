@@ -19,7 +19,7 @@ fn read_vec_w_num() -> Vec<u32> {
 }
 
 // return position of the element if found
-fn binary_search(vec: &Vec<u32>, value: u32) -> Option<usize> {
+fn binary_search(vec: &[u32], value: u32) -> Option<usize> {
     let mut l: i32 = 0;
     let mut r: i32 = vec.len() as i32 - 1;
     while  l <= r {
