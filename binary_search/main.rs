@@ -18,22 +18,21 @@ fn read_vec_w_num() -> Vec<u32> {
     vec
 }
 
-// return position of the element if found (indexing from 1),
-// return -1 otherwise
-fn binary_search(vec: &Vec<u32>, value: u32) -> i32 {
+// return position of the element if found
+fn binary_search(vec: &Vec<u32>, value: u32) -> Option<usize> {
     let mut l: i32 = 0;
     let mut r: i32 = vec.len() as i32 - 1;
     while  l <= r {
         let i = ((l + r) / 2) as usize;
         if vec[i] == value {
-          return i as i32 + 1;
+          return Some(i);
         } else if vec[i] > value {
           r = i as i32 - 1;
         } else if vec[i] < value {
           l = i as i32 + 1;
         } 
     }
-    -1
+    None
 }
 
 fn main() {
@@ -47,6 +46,6 @@ fn main() {
 
     // 3. Search values, write results
     for b in b_vec {
-        print!("{} ", binary_search(&a_vec, b));
+        print!("{} ", binary_search(&a_vec, b).map_or(-1, |i| i as i32 + 1));
     }
 }
