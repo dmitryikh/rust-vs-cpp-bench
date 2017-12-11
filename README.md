@@ -34,6 +34,9 @@ strings. The algorithm is implemented in dynamic prgramming manner. Complexity i
 ## Performance results
 ![Performance table](performance_table.png?raw=true "Performance table")
 
+`(core)` means measurments of only algorithmic part of the programs (excluding
+startup, input-output operations)
+
 ## Folders overview
 
 Each problem can be found in the folder with the same name. In each folder here
@@ -69,7 +72,7 @@ minutes to perform all compilations, generations and performance measures.
 The next command line is used to compile C++ program:
 
 ```
-	g++ -std=c++11 -O2 -o main_cpp main.cpp
+	g++ -std=c++11 -O2 -DNDEBUG -o main_cpp main.cpp
 ```
 
 The next command line is used to compile Rust program:
