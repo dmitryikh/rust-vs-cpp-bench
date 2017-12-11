@@ -1,3 +1,5 @@
+extern crate common;
+use common::measure_and_print;
 use std::io;
 
 fn read_line() -> String {
@@ -38,11 +40,21 @@ fn binary_search(vec: &[u32], value: u32) -> Option<usize> {
 fn main() {
 
     // 1. Read the array, and values for search
-    let mut a_vec = read_vec_w_num();
+    let a_vec = read_vec_w_num();
     let b_vec = read_vec_w_num();
 
-    // 2. Search values, write results
-    for b in b_vec {
-        print!("{} ", binary_search(&a_vec, b).map_or(-1, |i| i as i32 + 1));
+
+    // 2. Search values
+    let mut res = vec![0; b_vec.len()];
+    measure_and_print(||
+        {
+            for (i, b) in b_vec.iter().enumerate() {
+                res[i] = binary_search(&a_vec, *b).map_or(-1, |i| i as i32 + 1);
+            }
+        });
+
+    // 3. Write results
+    for r in &res {
+        print!("{} ", r);
     }
 }

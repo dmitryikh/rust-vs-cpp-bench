@@ -1,3 +1,5 @@
+extern crate common;
+use common::measure_and_print;
 use std::io;
 use std::cmp::min;
 
@@ -38,8 +40,12 @@ fn main() {
     let str1 = read_line();
     let str2 = read_line();
 
-    // 2. Calculate Levenshtein distance between strings
-    let dist = get_levenshtein_distance(&str1, &str2);
+    let mut dist: u32 = 0;
+    measure_and_print(||
+        {
+            // 2. Calculate Levenshtein distance between strings
+            dist = get_levenshtein_distance(&str1, &str2);
+        });
 
     // 3. Write result
     println!("{}", dist);

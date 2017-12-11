@@ -1,8 +1,10 @@
+extern crate common;
+use common::measure_and_print;
+
 use std::cmp::Ordering;
 use std::collections::BinaryHeap;
 use std::collections::HashMap;
 use std::io;
-use std::ops::Add;
 
 // Type of the reference to the node
 type Link = Option<Box<Node>>;
@@ -69,38 +71,42 @@ fn main() {
     // 1.Read message
     let sentence = read_line();
 
-    // 2. Calculate frequancy map for letters
     let mut letter_freq = HashMap::<char, u32>::new();
-    for c in sentence.chars() {
-        let freq = letter_freq.entry(c).or_insert(0);
-        *freq += 1;
-    }
-
-    // 3. Build Huffman tree & table
-    let mut heap = BinaryHeap::<Node>::new();
-    let mut table = HashMap::<char, String>::new();
-    for (c, count) in &letter_freq {
-        heap.push(Node::new_leaf(*count, *c));
-    }
-    if heap.len() > 1 {
-        while heap.len() > 1 {
-            // take two least frequent nodes and build new one on top of it
-            let a = heap.pop().unwrap();
-            let b = heap.pop().unwrap();
-            heap.push(Node::combine(a, b));
-        }
-        // take head of the tree and traverse it build letter->code map
-        heap.peek().unwrap().build_map(&mut table, String::from(""));
-    }
-    else if heap.len() == 1 {
-        heap.peek().unwrap().build_map(&mut table, String::from("0"));
-    }
-
-    // 4. Encode message
     let mut code_string = String::new();
-    for c in sentence.chars() {
-        code_string = code_string.add(table.get(&c).unwrap());
-    }
+    let mut table = HashMap::<char, String>::new();
+
+    measure_and_print(||
+        {
+            // 2. Calculate frequancy map for letters
+            for c in sentence.chars() {
+                let freq = letter_freq.entry(c).or_insert(0);
+                *freq += 1;
+            }
+
+            // 3. Build Huffman tree & table
+            let mut heap = BinaryHeap::<Node>::new();
+            for (c, count) in &letter_freq {
+                heap.push(Node::new_leaf(*count, *c));
+            }
+            if heap.len() > 1 {
+                while heap.len() > 1 {
+                    // take two least frequent nodes and build new one on top of it
+                    let a = heap.pop().unwrap();
+                    let b = heap.pop().unwrap();
+                    heap.push(Node::combine(a, b));
+                }
+                // take head of the tree and traverse it build letter->code map
+                heap.peek().unwrap().build_map(&mut table, String::from(""));
+            }
+            else if heap.len() == 1 {
+                heap.peek().unwrap().build_map(&mut table, String::from("0"));
+            }
+
+            // 4. Encode message
+            for c in sentence.chars() {
+                code_string.push_str(table.get(&c).unwrap());
+            }
+        });
 
     // 5. Output
     println!("{} {}", letter_freq.len(), code_string.len());

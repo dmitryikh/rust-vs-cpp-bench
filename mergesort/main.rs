@@ -1,3 +1,5 @@
+extern crate common;
+use common::measure_and_print;
 use std::io;
 use std::cmp::min;
 
@@ -75,8 +77,12 @@ fn main() {
         a_vec[i] = token.parse().unwrap();    
     }
 
-    // 2. Mergesort the array, calculate number of swaps
-    let nswap = merge_sort(&mut a_vec);
+    let mut nswap: u64 = 0;
+    measure_and_print(||
+        {
+            // 2. Mergesort the array, calculate number of swaps
+            nswap = merge_sort(&mut a_vec);
+        });
 
     // 3. Write result
     println!("{}", nswap);

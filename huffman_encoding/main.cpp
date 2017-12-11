@@ -5,6 +5,8 @@
 #include <unordered_map>
 #include <exception>
 
+#include "../common/common.hpp"
+
 struct HuffmanCodec final {
 
     // typedef and struct declaration to organize a priority queue to build Huffman tree
@@ -143,19 +145,23 @@ int main() {
     std::string str;
     std::cin >> str;
 
-    // 2. Calculate frequancy map for letters
-    std::unordered_map<char, int> freq;
-    for(char c : str) {
-        freq[c]++;
-    }
-
-    // 3. Build Huffman tree & table
     HuffmanCodec codec;
-    codec.buildTree(freq);
-    codec.buildTable();
+    std::string code;
+    measure_and_print([&codec, &str, &code] ()
+        {
+            // 2. Calculate frequancy map for letters
+            std::unordered_map<char, int> freq;
+            for(char c : str) {
+                freq[c]++;
+            }
 
-    // 4. Encode message
-    std::string code = codec.encode(str);
+            // 3. Build Huffman tree & table
+            codec.buildTree(freq);
+            codec.buildTable();
+
+            // 4. Encode message
+            code = codec.encode(str);
+        });
 
     // 5. Output
     std::cout << codec.size() << " " << code.size() << std::endl;

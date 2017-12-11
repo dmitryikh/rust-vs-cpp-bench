@@ -1,4 +1,7 @@
+extern crate common;
+use common::measure_and_print;
 use std::io;
+use std::collections::HashMap;
 
 // Type of the reference to the node
 type Link = Option<Box<Node>>;
@@ -76,22 +79,32 @@ fn main() {
     let input = read_line();
     let mut iter = input.split_whitespace();
     let char_n: i32 = iter.next().unwrap().parse().unwrap();
-    let code_n: i32 = iter.next().unwrap().parse().unwrap();
+    // let code_n: i32 = iter.next().unwrap().parse().unwrap();
 
-    // 1-2. Read letter->code table & build the tree, read the code message
+    let mut table = HashMap::<char, String>::new();
+
+    // 1. Read letter->code table, read the code message
     let mut root = Some(Box::new(Node::new_leaf(' ')));
     for _ in 0..char_n {
         let input = read_line();
         let mut iter = input.split(':');
-        add_letter( &mut root
-                  , iter.next().unwrap().trim().parse().unwrap()
-                  , iter.next().unwrap().trim()
-                  );
+        table.insert( iter.next().unwrap().trim().parse().unwrap()
+                    , iter.next().unwrap().trim().to_string()
+                    );
     }
     let code_string = read_line();
 
-    // 3. Decode message
-    let message = decode(root.as_ref().unwrap(), &code_string);
+    let mut message = String::new();
+    measure_and_print(||
+        {
+            // 2. Build the tree
+            for (letter, code) in &table {
+                add_letter(&mut root, *letter, code);
+            }
+
+            // 3. Decode message
+            message = decode(root.as_ref().unwrap(), &code_string);
+        });
 
     // 4. Output
     println!("{}", message);

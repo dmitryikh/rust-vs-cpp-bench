@@ -3,6 +3,8 @@
 #include <vector>
 #include <algorithm>
 
+#include "../common/common.hpp"
+
 // return position of the element if found (indexing from 1),
 // return -1 otherwise
 template<typename T>
@@ -37,15 +39,20 @@ int main(int argc, char** argv) {
     std::ios::sync_with_stdio(false);
 
     // 1. Read the array, and values for search
-    auto a_vec = read_vec_w_num();
+    auto const a_vec = read_vec_w_num();
     auto const b_vec = read_vec_w_num();
 
-    // 2. Sort the array
-    std::sort(std::begin(a_vec), std::end(a_vec));
+    // 2. Search values, write results
+    std::vector<int> res(b_vec.size());
+    measure_and_print([&a_vec, &b_vec, &res] ()
+        {
+            for (size_t i = 0; i < b_vec.size(); i++)
+                res[i] = binary_search(a_vec, b_vec[i]);
+        });
 
-    // 3. Search values, write results
-    for (auto const& val: b_vec)
-        std::cout << binary_search(a_vec, val) << " ";
+    // 3. Write results
+    for (auto const& r: res)
+        std::cout << r << " ";
 
     return 0;
 }

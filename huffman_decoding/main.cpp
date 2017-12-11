@@ -3,6 +3,8 @@
 #include <vector>
 #include <unordered_map>
 
+#include "../common/common.hpp"
+
 struct HuffmanCodec final {
 
     struct Node {
@@ -128,14 +130,18 @@ int main() {
     }
     std::cin >> _code;
 
-    // 2. Build Huffman tree
-    HuffmanCodec codec;
-    codec.buildTree(letters);
+    std::string res;
+    measure_and_print([&letters, &_code, &res] ()
+        {
+            // 2. Build Huffman tree
+            HuffmanCodec codec;
+            codec.buildTree(letters);
 
-    // 3. Decode message
-    std::string const res = codec.decode(_code);
+            // 3. Decode message
+            res = codec.decode(_code);
+        });
 
     // 4. Output
-    std::cout << codec.decode(_code) << std::endl;
+    std::cout << res << std::endl;
     return 0;
 }

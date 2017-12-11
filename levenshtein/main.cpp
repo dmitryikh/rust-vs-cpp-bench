@@ -5,6 +5,8 @@
 #include <vector>
 #include <cassert>
 
+#include "../common/common.hpp"
+
 int get_levenshtein_distance(const std::string &str1, const std::string &str2) {
     size_t n = str1.size() + 1;
     size_t m = str2.size() + 1;
@@ -36,8 +38,12 @@ int main(void) {
     std::string str2;
     std::cin >> str1 >> str2;
 
-    // 2. Calculate Levenshtein distance between strings
-    int dist = get_levenshtein_distance(str1, str2);
+    int dist = 0;
+    measure_and_print([&str1, &str2, &dist]
+        {
+            // 2. Calculate Levenshtein distance between strings
+            dist = get_levenshtein_distance(str1, str2);
+        });
 
     // 3. Write result
     std::cout << dist << std::endl;

@@ -3,6 +3,8 @@
 #include<queue>
 #include<algorithm>
 
+#include "../common/common.hpp"
+
 template<typename T>
 long _merge(std::vector<T>& vec, size_t const left, size_t const mid, size_t const right) {
     long swap_count = 0;
@@ -72,8 +74,12 @@ int main() {
     // 1. Read the array
     auto vec = read_vec_w_num();
 
-    // 2. Mergesort the array, calculate number of swaps
-    long nswap = merge_sort(vec);
+    long nswap = 0;
+    measure_and_print([&vec, &nswap] ()
+        {
+            // 2. Mergesort the array, calculate number of swaps
+            nswap = merge_sort(vec);
+        });
 
     // 3. Write result
     std::cout << nswap << std::endl;
