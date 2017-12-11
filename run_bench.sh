@@ -8,6 +8,11 @@ cd common/measure
 cargo build --release &> /dev/null
 cd ../..
 
+# build rust commons
+cd common/rust_common
+cargo build --release &> /dev/null
+cd ../..
+
 # clean out file
 if [ -f $out ]; then rm -f $out; fi;
 touch $out

@@ -84,8 +84,14 @@ The next command line is used to compile Rust program:
 One needs to run Mac Os X or Linux with installed to PATH GNU C++ compiler or Clang and Rust. By the author the presented project was tested with the next softwares:
 
 ```
-> rustc -V
-Rustc 1.20.0 (f3d6973f4 2017-08-27)
+> rustc --version -v                                                                                                                                                                                  9:06:07  ☁  edit1 ☂ 𝝙 ✭ 𝝙 khdmitry-pc
+rustc 1.22.1 (05e2e1c41 2017-11-22)
+binary: rustc
+commit-hash: 05e2e1c41414e8fc73d0f267ea8dab1a3eeeaa99
+commit-date: 2017-11-22
+host: x86_64-unknown-linux-gnu
+release: 1.22.1
+LLVM version: 4.0
 
 > g++ -v
 ...
