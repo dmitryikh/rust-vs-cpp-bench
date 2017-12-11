@@ -24,6 +24,9 @@ fn main() {
     for a in &mut a_vec {
         *a = rand::thread_rng().gen_range(1, 1_000_000_000);
     }
+
+    a_vec.sort();
+
     for b in &mut b_vec {
         let chance: f64 = rand::thread_rng().gen_range(0.0, 1.0);
         *b = if chance <= pr {

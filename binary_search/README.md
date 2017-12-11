@@ -5,7 +5,8 @@
 For the given arrays `A` and `B` print index `j` that is `A[j] = B[i]` for
 every `i`, or `-1` if `B[i]` is not found in the `A`.  The first line contains
 `n`, which is number of elements in `A`. And `n` integer numbers, which is
-`A`'s elements. The second line containes the same information for `B` array.
+`A`'s elements. Elements of `A` in ascending order. The second line containes
+the same information for `B` array.
 
 ```
 Sample Input:

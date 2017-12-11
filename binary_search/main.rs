@@ -41,10 +41,7 @@ fn main() {
     let mut a_vec = read_vec_w_num();
     let b_vec = read_vec_w_num();
 
-    // 2. Sort the array
-    a_vec.sort();
-
-    // 3. Search values, write results
+    // 2. Search values, write results
     for b in b_vec {
         print!("{} ", binary_search(&a_vec, b).map_or(-1, |i| i as i32 + 1));
     }
